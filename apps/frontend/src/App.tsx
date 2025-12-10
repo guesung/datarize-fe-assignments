@@ -21,9 +21,7 @@ function App() {
         </div>
       </main>
 
-      {selectedCustomer && (
-        <CustomerDetail customer={selectedCustomer} onClose={() => setSelectedCustomer(null)} />
-      )}
+      {selectedCustomer && <CustomerDetail customer={selectedCustomer} onClose={() => setSelectedCustomer(null)} />}
     </div>
   )
 }
