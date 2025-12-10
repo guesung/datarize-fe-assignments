@@ -8,7 +8,8 @@ interface CustomerListProps {
   onCustomerSelect: (customer: Customer) => void
 }
 
-type SortOption = 'id' | 'asc' | 'desc'
+const SORT_OPTIONS = ['id', 'asc', 'desc'] as const
+type SortOption = (typeof SORT_OPTIONS)[number]
 
 export function CustomerList({ onCustomerSelect }: CustomerListProps) {
   const [sortBy, setSortBy] = useState<SortOption>('id')
@@ -35,7 +36,7 @@ export function CustomerList({ onCustomerSelect }: CustomerListProps) {
 
       <div className="mb-4 flex gap-2">
         <span className="text-sm text-gray-600 self-center">정렬:</span>
-        {(['id', 'desc', 'asc'] as const).map((option) => (
+        {SORT_OPTIONS.map((option) => (
           <button
             key={option}
             onClick={() => setSortBy(option)}
@@ -53,7 +54,7 @@ export function CustomerList({ onCustomerSelect }: CustomerListProps) {
       {isError && (
         <ErrorMessage
           message={error instanceof Error ? error.message : '고객 목록을 불러오는데 실패했습니다.'}
-          onRetry={() => refetch()}
+          onRetry={refetch}
         />
       )}
 

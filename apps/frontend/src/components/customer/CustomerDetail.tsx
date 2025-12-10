@@ -25,7 +25,7 @@ export function CustomerDetail({ customer, onClose }: CustomerDetailProps) {
       {isError && (
         <ErrorMessage
           message={error instanceof Error ? error.message : '구매 내역을 불러오는데 실패했습니다.'}
-          onRetry={() => refetch()}
+          onRetry={refetch}
         />
       )}
 
