@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { fetchCustomerPurchases } from '@/api'
+import { fetchCustomerPurchases } from '@/apis'
 
 export default function useCustomerPurchases(customerId: number) {
   return useQuery({
