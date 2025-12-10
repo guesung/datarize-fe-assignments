@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useDebounce } from '@/hooks'
 
 interface CustomerSearchProps {
   onSearch: (name: string) => void
@@ -6,14 +7,11 @@ interface CustomerSearchProps {
 
 export function CustomerSearch({ onSearch }: CustomerSearchProps) {
   const [searchTerm, setSearchTerm] = useState('')
+  const debouncedSearchTerm = useDebounce(searchTerm)
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      onSearch(searchTerm)
-    }, 300)
-
-    return () => clearTimeout(timer)
-  }, [searchTerm, onSearch])
+    onSearch(debouncedSearchTerm)
+  }, [debouncedSearchTerm, onSearch])
 
   return (
     <div className="mb-4">
