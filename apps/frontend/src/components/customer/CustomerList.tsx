@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react'
 import { useCustomers } from '@/hooks'
-import { Loading, ErrorMessage } from '@/components/common'
-import { CustomerSearch } from './CustomerSearch'
+import { Loading, ErrorMessage } from '@/components'
+import CustomerSearch from './CustomerSearch'
 import type { Customer } from '@/types'
 import { formatCurrency, getErrorMessage } from '@/utils'
 
@@ -18,7 +18,7 @@ const SORT_LABELS: Record<SortOption, string> = {
   desc: '구매금액 높은순',
 }
 
-export function CustomerList({ onCustomerSelect }: CustomerListProps) {
+export default function CustomerList({ onCustomerSelect }: CustomerListProps) {
   const [sortBy, setSortBy] = useState<SortOption>('id')
   const [searchName, setSearchName] = useState('')
 

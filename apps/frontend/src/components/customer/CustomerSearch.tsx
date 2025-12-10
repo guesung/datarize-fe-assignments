@@ -5,7 +5,7 @@ interface CustomerSearchProps {
   onSearch: (name: string) => void
 }
 
-export function CustomerSearch({ onSearch }: CustomerSearchProps) {
+export default function CustomerSearch({ onSearch }: CustomerSearchProps) {
   const [searchTerm, setSearchTerm] = useState('')
   const debouncedSearchTerm = useDebounce(searchTerm)
 

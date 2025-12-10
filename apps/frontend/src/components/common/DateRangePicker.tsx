@@ -5,7 +5,7 @@ interface DateRangePickerProps {
   onToDateChange: (date: string) => void
 }
 
-export function DateRangePicker({ fromDate, toDate, onFromDateChange, onToDateChange }: DateRangePickerProps) {
+export default function DateRangePicker({ fromDate, toDate, onFromDateChange, onToDateChange }: DateRangePickerProps) {
   const handleFromDateChange = (date: string) => {
     // 시작일이 종료일보다 늦으면 종료일을 시작일로 자동 조정
     if (date > toDate) {

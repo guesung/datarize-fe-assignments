@@ -3,7 +3,7 @@ import { HTTPError } from 'ky'
 import { fetchCustomers } from '@/api/apis'
 import type { Customer } from '@/types'
 
-export function useCustomers(sortBy?: string, name?: string) {
+export default function useCustomers(sortBy?: string, name?: string) {
   return useQuery({
     queryKey: ['customers', sortBy, name],
     queryFn: async (): Promise<Customer[]> => {

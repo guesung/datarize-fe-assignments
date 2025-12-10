@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { PurchaseFrequencyChart } from '@/components/chart'
-import { CustomerDetail, CustomerList } from '@/components/customer'
+import { PurchaseFrequencyChart, CustomerDetail, CustomerList } from '@/components'
 import type { Customer } from '@/types'
 
 function App() {

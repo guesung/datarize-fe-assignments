@@ -1,5 +1,5 @@
 import { useCustomerPurchases } from '@/hooks'
-import { Loading, ErrorMessage, Modal } from '@/components/common'
+import { Loading, ErrorMessage, Modal } from '@/components'
 import type { Customer } from '@/types'
 import { formatCurrency, formatDate, getErrorMessage } from '@/utils'
 
@@ -8,7 +8,7 @@ interface CustomerDetailProps {
   onClose: () => void
 }
 
-export function CustomerDetail({ customer, onClose }: CustomerDetailProps) {
+export default function CustomerDetail({ customer, onClose }: CustomerDetailProps) {
   const { data, isLoading, isError, error, refetch } = useCustomerPurchases(customer.id)
 
   return (

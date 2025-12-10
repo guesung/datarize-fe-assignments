@@ -3,7 +3,7 @@ interface ErrorMessageProps {
   onRetry?: () => void
 }
 
-export function ErrorMessage({ message, onRetry }: ErrorMessageProps) {
+export default function ErrorMessage({ message, onRetry }: ErrorMessageProps) {
   return (
     <div className="flex flex-col items-center justify-center p-8 text-red-600">
       <p className="mb-4">{message}</p>

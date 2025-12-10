@@ -1,3 +1,3 @@
-export { CustomerSearch } from './CustomerSearch'
-export { CustomerList } from './CustomerList'
-export { CustomerDetail } from './CustomerDetail'
+export { default as CustomerSearch } from './CustomerSearch'
+export { default as CustomerList } from './CustomerList'
+export { default as CustomerDetail } from './CustomerDetail'

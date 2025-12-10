@@ -7,7 +7,7 @@ import { formatPriceRange, getErrorMessage } from '@/utils'
 const DEFAULT_FROM_DATE = '2024-07-01'
 const DEFAULT_TO_DATE = '2024-07-31'
 
-export function PurchaseFrequencyChart() {
+export default function PurchaseFrequencyChart() {
   const [fromDate, setFromDate] = useState(DEFAULT_FROM_DATE)
   const [toDate, setToDate] = useState(DEFAULT_TO_DATE)
 
