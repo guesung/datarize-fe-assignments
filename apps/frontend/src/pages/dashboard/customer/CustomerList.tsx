@@ -2,14 +2,12 @@ import { Suspense, useState, useCallback } from 'react'
 import { ErrorBoundary, Loading } from '@/components'
 import CustomerSearch from './CustomerSearch'
 import CustomerListContent from './CustomerListContent'
-import type { Customer } from '@/types'
+import type { Customer, SortOption } from '@/types'
+import { SORT_OPTIONS } from '@/types'
 
 interface CustomerListProps {
   onCustomerSelect: (customer: Customer) => void
 }
-
-const SORT_OPTIONS = ['id', 'asc', 'desc'] as const
-type SortOption = (typeof SORT_OPTIONS)[number]
 
 const SORT_LABELS: Record<SortOption, string> = {
   id: 'ID순',
