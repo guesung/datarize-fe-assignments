@@ -3,6 +3,7 @@ import { useCustomers } from '@/hooks'
 import { Loading, ErrorMessage } from '@/components/common'
 import { CustomerSearch } from './CustomerSearch'
 import type { Customer } from '@/types'
+import { formatCurrency, getErrorMessage } from '@/utils'
 
 interface CustomerListProps {
   onCustomerSelect: (customer: Customer) => void
@@ -10,6 +11,12 @@ interface CustomerListProps {
 
 const SORT_OPTIONS = ['id', 'asc', 'desc'] as const
 type SortOption = (typeof SORT_OPTIONS)[number]
+
+const SORT_LABELS: Record<SortOption, string> = {
+  id: 'ID순',
+  asc: '구매금액 낮은순',
+  desc: '구매금액 높은순',
+}
 
 export function CustomerList({ onCustomerSelect }: CustomerListProps) {
   const [sortBy, setSortBy] = useState<SortOption>('id')
@@ -23,10 +30,6 @@ export function CustomerList({ onCustomerSelect }: CustomerListProps) {
   const handleSearch = useCallback((name: string) => {
     setSearchName(name)
   }, [])
-
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(amount)
-  }
 
   return (
     <div className="bg-white p-6 rounded-lg shadow">
@@ -44,7 +47,7 @@ export function CustomerList({ onCustomerSelect }: CustomerListProps) {
               sortBy === option ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
             }`}
           >
-            {option === 'id' ? 'ID순' : option === 'desc' ? '구매금액 높은순' : '구매금액 낮은순'}
+            {SORT_LABELS[option]}
           </button>
         ))}
       </div>
@@ -52,10 +55,7 @@ export function CustomerList({ onCustomerSelect }: CustomerListProps) {
       {isLoading && <Loading />}
 
       {isError && (
-        <ErrorMessage
-          message={error instanceof Error ? error.message : '고객 목록을 불러오는데 실패했습니다.'}
-          onRetry={refetch}
-        />
+        <ErrorMessage message={getErrorMessage(error, '고객 목록을 불러오는데 실패했습니다.')} onRetry={refetch} />
       )}
 
       {data && data.length > 0 && (
