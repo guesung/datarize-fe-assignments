@@ -10,19 +10,30 @@ interface CustomerListProps {
 
 type SortOption = 'id' | 'asc' | 'desc';
 
+/**
+ * 고객 목록 컴포넌트
+ * - 이름 검색 기능 (디바운스 적용)
+ * - 정렬 기능 (ID순, 구매금액 높은순/낮은순)
+ * - Row 클릭 시 해당 고객의 상세 정보 표시
+ */
 export function CustomerList({ onCustomerSelect }: CustomerListProps) {
+  // 정렬 옵션: 'id' (기본값), 'desc' (내림차순), 'asc' (오름차순)
   const [sortBy, setSortBy] = useState<SortOption>('id');
+  // 검색어 (이름 검색)
   const [searchName, setSearchName] = useState('');
 
+  // API 호출: sortBy가 'id'인 경우 undefined 전달 (기본 정렬)
   const { data, isLoading, isError, error, refetch } = useCustomers(
     sortBy === 'id' ? undefined : sortBy,
     searchName || undefined
   );
 
+  // 검색어 변경 핸들러 (CustomerSearch에서 디바운스 적용)
   const handleSearch = useCallback((name: string) => {
     setSearchName(name);
   }, []);
 
+  // 금액 포맷팅 (원화 표시)
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(amount);
   };
@@ -31,8 +42,10 @@ export function CustomerList({ onCustomerSelect }: CustomerListProps) {
     <div className="bg-white p-6 rounded-lg shadow">
       <h2 className="text-xl font-bold mb-4">고객 목록</h2>
 
+      {/* 이름 검색 입력 */}
       <CustomerSearch onSearch={handleSearch} />
 
+      {/* 정렬 버튼 그룹 */}
       <div className="mb-4 flex gap-2">
         <span className="text-sm text-gray-600 self-center">정렬:</span>
         {(['id', 'desc', 'asc'] as const).map((option) => (
@@ -50,8 +63,10 @@ export function CustomerList({ onCustomerSelect }: CustomerListProps) {
         ))}
       </div>
 
+      {/* 로딩 상태 */}
       {isLoading && <Loading />}
 
+      {/* 에러 상태 및 재시도 */}
       {isError && (
         <ErrorMessage
           message={error instanceof Error ? error.message : '고객 목록을 불러오는데 실패했습니다.'}
@@ -59,6 +74,7 @@ export function CustomerList({ onCustomerSelect }: CustomerListProps) {
         />
       )}
 
+      {/* 고객 목록 테이블 */}
       {data && data.length > 0 && (
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
@@ -104,6 +120,7 @@ export function CustomerList({ onCustomerSelect }: CustomerListProps) {
         </div>
       )}
 
+      {/* 검색 결과 없음 */}
       {data && data.length === 0 && (
         <p className="text-center text-gray-500 py-8">검색 결과가 없습니다.</p>
       )}
