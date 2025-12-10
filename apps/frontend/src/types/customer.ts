@@ -1,8 +1,3 @@
-export interface PurchaseFrequency {
-  range: string
-  count: number
-}
-
 export interface Customer {
   id: number
   name: string
@@ -17,9 +12,3 @@ export interface CustomerPurchase {
   price: number
   imgSrc: string
 }
-
-export interface ApiError {
-  error: string
-}
-
-export type SortBy = 'asc' | 'desc' | undefined
