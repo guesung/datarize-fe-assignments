@@ -74,30 +74,17 @@ yarn workspace frontend format
 
 ```
 src/
-├── api/
-│   └── client.ts           # ky 기반 API 클라이언트
-├── components/
-│   ├── chart/
-│   │   └── PurchaseFrequencyChart.tsx  # 구매 빈도 차트
-│   ├── common/
-│   │   ├── DateRangePicker.tsx   # 날짜 범위 선택
-│   │   ├── ErrorBoundary.tsx     # 에러 바운더리
-│   │   ├── ErrorMessage.tsx      # 에러 메시지
-│   │   └── Loading.tsx           # 로딩 스피너
-│   └── customer/
-│       ├── CustomerDetail.tsx    # 고객 상세 모달
-│       ├── CustomerList.tsx      # 고객 목록 테이블
-│       └── CustomerSearch.tsx    # 고객 검색/정렬
+├── apis/           # API 클라이언트 및 엔드포인트
+├── components/     # 공통 UI 컴포넌트 (Modal, Loading 등)
 ├── hooks/
-│   ├── useCustomerPurchases.ts   # 고객 구매 내역 조회
-│   ├── useCustomers.ts           # 고객 목록 조회
-│   └── usePurchaseFrequency.ts   # 구매 빈도 조회
-├── types/
-│   └── index.ts            # API 응답 타입 정의
-├── utils/
-│   └── format.ts           # 포맷팅 유틸 함수
-├── App.tsx                 # 메인 앱 컴포넌트
-└── main.tsx               # 앱 진입점
+│   ├── common/     # 공통 유틸리티 훅 (useDebounce 등)
+│   └── queries/    # React Query 훅
+├── pages/
+│   └── dashboard/  # 대시보드 페이지 및 전용 컴포넌트
+├── types/          # 타입 정의
+├── utils/          # 유틸리티 함수
+├── App.tsx
+└── main.tsx
 ```
 
 ## API 명세
