@@ -1,6 +1,7 @@
 import { useCustomerPurchases } from '@/hooks'
 import { Loading, ErrorMessage, Modal } from '@/components/common'
 import type { Customer } from '@/types'
+import { formatCurrency, formatDate, getErrorMessage } from '@/utils'
 
 interface CustomerDetailProps {
   customer: Customer
@@ -10,23 +11,12 @@ interface CustomerDetailProps {
 export function CustomerDetail({ customer, onClose }: CustomerDetailProps) {
   const { data, isLoading, isError, error, refetch } = useCustomerPurchases(customer.id)
 
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(amount)
-  }
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('ko-KR')
-  }
-
   return (
     <Modal title={`${customer.name}님의 구매 내역`} onClose={onClose}>
       {isLoading && <Loading />}
 
       {isError && (
-        <ErrorMessage
-          message={error instanceof Error ? error.message : '구매 내역을 불러오는데 실패했습니다.'}
-          onRetry={refetch}
-        />
+        <ErrorMessage message={getErrorMessage(error, '구매 내역을 불러오는데 실패했습니다.')} onRetry={refetch} />
       )}
 
       {data && data.length > 0 && (
