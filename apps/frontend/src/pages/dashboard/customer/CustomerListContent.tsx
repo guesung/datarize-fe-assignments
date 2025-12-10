@@ -1,9 +1,10 @@
 import { useCustomers } from '@/hooks'
-import type { Customer } from '@/types'
+import type { Customer, SortOption } from '@/types'
 import { formatCurrency } from '@/utils'
+import { EmptyState } from '@/components/common'
 
 interface CustomerListContentProps {
-  sortBy: string
+  sortBy: SortOption
   searchName: string
   onCustomerSelect: (customer: Customer) => void
 }
@@ -12,7 +13,7 @@ export default function CustomerListContent({ sortBy, searchName, onCustomerSele
   const { data } = useCustomers(sortBy === 'id' ? undefined : sortBy, searchName || undefined)
 
   if (!data || data.length === 0) {
-    return <p className="text-center text-gray-500 py-8">검색 결과가 없습니다.</p>
+    return <EmptyState message="검색 결과가 없습니다." />
   }
 
   return (
