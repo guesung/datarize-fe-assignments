@@ -1,6 +1,6 @@
 import { Suspense, useState } from 'react'
 import { ErrorBoundary, Loading, DateRangePicker } from '@/components/common'
-import PurchaseFrequencyChartContent from './PurchaseFrequencyChartContent'
+import PurchaseFrequencyChartContent from '../purchase/PurchaseFrequencyChartContent'
 
 const DEFAULT_FROM_DATE = '2024-07-01'
 const DEFAULT_TO_DATE = '2024-07-31'

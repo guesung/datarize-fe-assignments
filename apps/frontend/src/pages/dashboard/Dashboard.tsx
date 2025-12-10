@@ -1,10 +1,10 @@
 import { useState, lazy, Suspense } from 'react'
 import type { Customer } from '@/types'
-import { PurchaseFrequencyChart } from './purchase'
-import { CustomerList } from './customer'
+import { PurchaseFrequencyChart } from './purchase-frequency-chart'
+import { CustomerList } from './customer-list'
 import { Loading } from '@/components'
 
-const CustomerDetail = lazy(() => import('./customer/CustomerDetail'))
+const CustomerDetail = lazy(() => import('./customer-detail').then((module) => ({ default: module.CustomerDetail })))
 
 export default function Dashboard() {
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null)

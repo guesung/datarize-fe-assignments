@@ -1,9 +1,9 @@
 import { Suspense, useState, useCallback } from 'react'
 import { ErrorBoundary, Loading } from '@/components'
+import type { Customer, SortOption } from '@/types'
+import { SORT_OPTIONS } from '@/constants'
 import CustomerSearch from './CustomerSearch'
 import CustomerListContent from './CustomerListContent'
-import type { Customer, SortOption } from '@/types'
-import { SORT_OPTIONS } from '@/types'
 
 interface CustomerListProps {
   onCustomerSelect: (customer: Customer) => void
