@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { HTTPError } from 'ky'
-import { fetchCustomers } from '@/api/client'
+import { fetchCustomers } from '@/api/apis'
 import type { Customer } from '@/types'
 
 export function useCustomers(sortBy?: string, name?: string) {
