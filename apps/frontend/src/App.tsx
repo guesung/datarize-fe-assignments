@@ -1,6 +1,5 @@
-import { Suspense, useState } from 'react'
+import { useState } from 'react'
 import { PurchaseFrequencyChart } from './components/chart'
-import { ErrorBoundary, Loading } from './components/common'
 import { CustomerDetail, CustomerList } from './components/customer'
 import type { Customer } from './types'
 
@@ -17,26 +16,13 @@ function App() {
 
       <main className="max-w-7xl mx-auto py-6 px-4">
         <div className="grid gap-6">
-          <ErrorBoundary>
-            <Suspense fallback={<Loading />}>
-              <PurchaseFrequencyChart />
-            </Suspense>
-          </ErrorBoundary>
-
-          <ErrorBoundary>
-            <Suspense fallback={<Loading />}>
-              <CustomerList onCustomerSelect={setSelectedCustomer} />
-            </Suspense>
-          </ErrorBoundary>
+          <PurchaseFrequencyChart />
+          <CustomerList onCustomerSelect={setSelectedCustomer} />
         </div>
       </main>
 
       {selectedCustomer && (
-        <ErrorBoundary>
-          <Suspense fallback={<Loading />}>
-            <CustomerDetail customer={selectedCustomer} onClose={() => setSelectedCustomer(null)} />
-          </Suspense>
-        </ErrorBoundary>
+        <CustomerDetail customer={selectedCustomer} onClose={() => setSelectedCustomer(null)} />
       )}
     </div>
   )
