@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { formatPriceRange, formatCurrency, formatDate } from '../format'
+import { formatPriceRange, formatCurrency, formatDate } from './format'
 
 describe('formatPriceRange', () => {
   it('0 - 20000 범위를 "~2만원"으로 변환', () => {
