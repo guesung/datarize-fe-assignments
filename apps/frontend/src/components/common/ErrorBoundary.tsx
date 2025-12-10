@@ -1,8 +1,13 @@
 import { Component, ReactNode } from 'react'
+import { QueryClient, useQueryClient } from '@tanstack/react-query'
 
 interface ErrorBoundaryProps {
   children: ReactNode
   fallback?: ReactNode
+}
+
+interface ErrorBoundaryInnerProps extends ErrorBoundaryProps {
+  queryClient: QueryClient
 }
 
 interface ErrorBoundaryState {
@@ -10,8 +15,8 @@ interface ErrorBoundaryState {
   error: Error | null
 }
 
-export default class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  constructor(props: ErrorBoundaryProps) {
+class ErrorBoundaryInner extends Component<ErrorBoundaryInnerProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryInnerProps) {
     super(props)
     this.state = { hasError: false, error: null }
   }
@@ -21,6 +26,8 @@ export default class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBo
   }
 
   handleReset = () => {
+    // React Query 캐시도 리셋하여 에러 상태 제거
+    this.props.queryClient.resetQueries()
     this.setState({ hasError: false, error: null })
   }
 
@@ -46,4 +53,10 @@ export default class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBo
 
     return this.props.children
   }
+}
+
+// 함수형 래퍼 컴포넌트: useQueryClient 훅을 사용하여 queryClient를 전달
+export default function ErrorBoundary(props: ErrorBoundaryProps) {
+  const queryClient = useQueryClient()
+  return <ErrorBoundaryInner {...props} queryClient={queryClient} />
 }
