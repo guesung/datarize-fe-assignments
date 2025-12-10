@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
-import { usePurchaseFrequency } from '../../hooks'
-import { Loading, ErrorMessage, DateRangePicker } from '../common'
-import { formatPriceRange } from '../../utils'
+import { usePurchaseFrequency } from '@/hooks'
+import { Loading, ErrorMessage, DateRangePicker } from '@/components/common'
+import { formatPriceRange } from '@/utils'
 
 export function PurchaseFrequencyChart() {
   const [fromDate, setFromDate] = useState('2024-07-01')

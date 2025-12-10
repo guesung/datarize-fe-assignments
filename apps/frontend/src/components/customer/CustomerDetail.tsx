@@ -1,6 +1,6 @@
-import { useCustomerPurchases } from '../../hooks'
-import { Loading, ErrorMessage, Modal } from '../common'
-import type { Customer } from '../../types'
+import { useCustomerPurchases } from '@/hooks'
+import { Loading, ErrorMessage, Modal } from '@/components/common'
+import type { Customer } from '@/types'
 
 interface CustomerDetailProps {
   customer: Customer
@@ -33,14 +33,7 @@ export function CustomerDetail({ customer, onClose }: CustomerDetailProps) {
         <div className="space-y-4">
           {data.map((purchase, index) => (
             <div key={index} className="flex gap-4 p-4 border border-gray-200 rounded-lg">
-              <img
-                src={purchase.imgSrc}
-                alt={purchase.product}
-                className="w-20 h-20 object-cover rounded"
-                onError={(e) => {
-                  ;(e.target as HTMLImageElement).src = 'https://via.placeholder.com/80?text=No+Image'
-                }}
-              />
+              <img src={purchase.imgSrc} alt={purchase.product} className="w-20 h-20 object-cover rounded" />
               <div className="flex-1">
                 <h3 className="font-medium text-gray-900">{purchase.product}</h3>
                 <p className="text-sm text-gray-500">구매일: {formatDate(purchase.date)}</p>

@@ -1,8 +1,8 @@
 import { useState, useCallback } from 'react'
-import { useCustomers } from '../../hooks'
-import { Loading, ErrorMessage } from '../common'
+import { useCustomers } from '@/hooks'
+import { Loading, ErrorMessage } from '@/components/common'
 import { CustomerSearch } from './CustomerSearch'
-import type { Customer } from '../../types'
+import type { Customer } from '@/types'
 
 interface CustomerListProps {
   onCustomerSelect: (customer: Customer) => void

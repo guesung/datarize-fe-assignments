@@ -1,5 +1,5 @@
 import ky from 'ky'
-import type { PurchaseFrequency, Customer, CustomerPurchase } from '../types'
+import type { PurchaseFrequency, Customer, CustomerPurchase } from '@/types'
 
 const api = ky.create({
   prefixUrl: '/api',

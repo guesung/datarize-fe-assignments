@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { PurchaseFrequencyChart } from './components/chart'
-import { CustomerDetail, CustomerList } from './components/customer'
-import type { Customer } from './types'
+import { PurchaseFrequencyChart } from '@/components/chart'
+import { CustomerDetail, CustomerList } from '@/components/customer'
+import type { Customer } from '@/types'
 
 function App() {
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null)

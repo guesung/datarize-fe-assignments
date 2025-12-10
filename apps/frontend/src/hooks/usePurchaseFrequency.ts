@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { fetchPurchaseFrequency } from '../api/client'
+import { fetchPurchaseFrequency } from '@/api/client'
 
 export function usePurchaseFrequency(from?: string, to?: string) {
   return useQuery({
