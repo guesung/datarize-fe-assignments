@@ -9,7 +9,7 @@ interface CustomerDetailContentProps {
 export default function CustomerDetailContent({ customer }: CustomerDetailContentProps) {
   const { data } = useCustomerPurchases(customer.id)
 
-  if (!data || data.length === 0) {
+  if (data.length === 0) {
     return <p className="text-center text-gray-500 py-8">구매 내역이 없습니다.</p>
   }
 

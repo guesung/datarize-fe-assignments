@@ -16,12 +16,12 @@ const CHART_COLORS = {
 export default function PurchaseFrequencyChartContent({ fromDate, toDate }: PurchaseFrequencyChartContentProps) {
   const { data } = usePurchaseFrequency(fromDate, toDate)
 
-  const chartData = data?.map((item) => ({
+  const chartData = data.map((item) => ({
     ...item,
     label: formatPriceRange(item.range),
   }))
 
-  if (!chartData || chartData.length === 0) {
+  if (chartData.length === 0) {
     return <EmptyState message="데이터가 없습니다." />
   }
 

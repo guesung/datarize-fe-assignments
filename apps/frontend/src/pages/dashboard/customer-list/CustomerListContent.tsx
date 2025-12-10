@@ -13,7 +13,7 @@ interface CustomerListContentProps {
 export default function CustomerListContent({ sortBy, searchName, onCustomerSelect }: CustomerListContentProps) {
   const { data } = useCustomers(sortBy === 'id' ? undefined : sortBy, searchName || undefined)
 
-  if (!data || data.length === 0) {
+  if (data.length === 0) {
     return <EmptyState message="검색 결과가 없습니다." />
   }
 
