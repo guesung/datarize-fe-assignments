@@ -1,4 +1,2 @@
-export { usePurchaseFrequency } from './usePurchaseFrequency'
-export { useCustomers } from './useCustomers'
-export { useCustomerPurchases } from './useCustomerPurchases'
-export { useDebounce } from './useDebounce'
+export * from './common'
+export * from './queries'
