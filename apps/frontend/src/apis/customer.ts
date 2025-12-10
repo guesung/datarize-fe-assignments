@@ -1,5 +1,5 @@
 import { api } from './api'
-import { CustomerPurchaseResponse, CustomerResponse } from './type'
+import { CustomerPurchaseResponse, CustomerResponse } from './response'
 
 export async function fetchCustomers(sortBy?: string, name?: string): Promise<CustomerResponse> {
   const searchParams = new URLSearchParams()

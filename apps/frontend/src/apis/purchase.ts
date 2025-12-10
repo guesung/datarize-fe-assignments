@@ -1,5 +1,5 @@
 import { api } from './api'
-import { PurchaseFrequencyResponse } from './type'
+import { PurchaseFrequencyResponse } from './response'
 
 export async function fetchPurchaseFrequency(from?: string, to?: string): Promise<PurchaseFrequencyResponse> {
   const searchParams = new URLSearchParams()
