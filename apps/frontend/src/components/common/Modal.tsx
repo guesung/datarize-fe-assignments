@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { useRef } from 'react'
-import { CloseIcon } from '@/components/icons'
+import { CloseIcon } from '@/components'
 import { useEscapeKey, useFocusTrap } from '@/hooks'
 
 interface ModalProps {

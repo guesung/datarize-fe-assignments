@@ -1,7 +1,7 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import { usePurchaseFrequency } from '@/hooks'
 import { formatPriceRange } from '@/utils'
-import { EmptyState } from '@/components/common'
+import { EmptyState } from '@/components'
 
 interface PurchaseFrequencyChartContentProps {
   fromDate: string

@@ -9,7 +9,7 @@ interface CustomerListProps {
 }
 
 const SORT_OPTIONS = ['id', 'asc', 'desc'] as const
-type SortOption = (typeof SORT_OPTIONS)[number]
+export type SortOption = (typeof SORT_OPTIONS)[number]
 
 const SORT_LABELS: Record<SortOption, string> = {
   id: 'ID순',

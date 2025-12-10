@@ -1,7 +1,8 @@
 import { useCustomers } from '@/hooks'
-import type { Customer, SortOption } from '@/types'
+import type { Customer } from '@/types'
 import { formatCurrency } from '@/utils'
-import { EmptyState } from '@/components/common'
+import { EmptyState } from '@/components'
+import { SortOption } from './CustomerList'
 
 interface CustomerListContentProps {
   sortBy: SortOption
