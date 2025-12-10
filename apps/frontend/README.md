@@ -102,8 +102,8 @@ src/
 
 ## API 명세
 
-| 엔드포인트                       | 설명              | 쿼리 파라미터                                |
-| -------------------------------- | ----------------- | -------------------------------------------- |
-| `GET /api/purchase-frequency`    | 구매 빈도 데이터  | `from`, `to` (ISO 8601 형식, optional)       |
-| `GET /api/customers`             | 고객 목록         | `sortBy` (asc/desc), `name` (검색, optional) |
-| `GET /api/customers/{id}/purchases` | 고객 구매 내역 | -                                            |
+| 엔드포인트                          | 설명             | 쿼리 파라미터                                |
+| ----------------------------------- | ---------------- | -------------------------------------------- |
+| `GET /api/purchase-frequency`       | 구매 빈도 데이터 | `from`, `to` (ISO 8601 형식, optional)       |
+| `GET /api/customers`                | 고객 목록        | `sortBy` (asc/desc), `name` (검색, optional) |
+| `GET /api/customers/{id}/purchases` | 고객 구매 내역   | -                                            |
