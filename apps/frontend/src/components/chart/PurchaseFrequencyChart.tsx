@@ -33,7 +33,7 @@ export function PurchaseFrequencyChart() {
       {isError && (
         <ErrorMessage
           message={error instanceof Error ? error.message : '데이터를 불러오는데 실패했습니다.'}
-          onRetry={() => refetch()}
+          onRetry={refetch}
         />
       )}
 
