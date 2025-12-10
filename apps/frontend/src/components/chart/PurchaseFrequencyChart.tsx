@@ -2,11 +2,14 @@ import { useState } from 'react'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import { usePurchaseFrequency } from '@/hooks'
 import { Loading, ErrorMessage, DateRangePicker } from '@/components/common'
-import { formatPriceRange } from '@/utils'
+import { formatPriceRange, getErrorMessage } from '@/utils'
+
+const DEFAULT_FROM_DATE = '2024-07-01'
+const DEFAULT_TO_DATE = '2024-07-31'
 
 export function PurchaseFrequencyChart() {
-  const [fromDate, setFromDate] = useState('2024-07-01')
-  const [toDate, setToDate] = useState('2024-07-31')
+  const [fromDate, setFromDate] = useState(DEFAULT_FROM_DATE)
+  const [toDate, setToDate] = useState(DEFAULT_TO_DATE)
 
   const { data, isLoading, isError, error, refetch } = usePurchaseFrequency(fromDate, toDate)
 
@@ -31,10 +34,7 @@ export function PurchaseFrequencyChart() {
       {isLoading && <Loading />}
 
       {isError && (
-        <ErrorMessage
-          message={error instanceof Error ? error.message : '데이터를 불러오는데 실패했습니다.'}
-          onRetry={refetch}
-        />
+        <ErrorMessage message={getErrorMessage(error, '데이터를 불러오는데 실패했습니다.')} onRetry={refetch} />
       )}
 
       {chartData && (
