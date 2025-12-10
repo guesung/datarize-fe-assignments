@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { PurchaseFrequencyChart } from './components/chart';
 import { CustomerList, CustomerDetail } from './components/customer';
+import { ErrorBoundary, Loading } from './components/common';
 import type { Customer } from './types';
 
 function App() {
@@ -19,19 +20,31 @@ function App() {
       <main className="max-w-7xl mx-auto py-6 px-4">
         <div className="grid gap-6">
           {/* 가격대별 구매 빈도 차트 */}
-          <PurchaseFrequencyChart />
+          <ErrorBoundary>
+            <Suspense fallback={<Loading />}>
+              <PurchaseFrequencyChart />
+            </Suspense>
+          </ErrorBoundary>
 
           {/* 고객 목록 */}
-          <CustomerList onCustomerSelect={setSelectedCustomer} />
+          <ErrorBoundary>
+            <Suspense fallback={<Loading />}>
+              <CustomerList onCustomerSelect={setSelectedCustomer} />
+            </Suspense>
+          </ErrorBoundary>
         </div>
       </main>
 
       {/* 고객 상세 모달 */}
       {selectedCustomer && (
-        <CustomerDetail
-          customer={selectedCustomer}
-          onClose={() => setSelectedCustomer(null)}
-        />
+        <ErrorBoundary>
+          <Suspense fallback={<Loading />}>
+            <CustomerDetail
+              customer={selectedCustomer}
+              onClose={() => setSelectedCustomer(null)}
+            />
+          </Suspense>
+        </ErrorBoundary>
       )}
     </div>
   );
