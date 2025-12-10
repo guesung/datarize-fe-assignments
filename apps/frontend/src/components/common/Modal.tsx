@@ -12,7 +12,6 @@ export function Modal({ title, onClose, children }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null)
   const overlayRef = useRef<HTMLDivElement>(null)
 
-  // ESC 키로 모달 닫기
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -24,12 +23,10 @@ export function Modal({ title, onClose, children }: ModalProps) {
     return () => document.removeEventListener('keydown', handleEscape)
   }, [onClose])
 
-  // 포커스 트랩 - 모달 열릴 때 첫 번째 포커스 가능한 요소에 포커스
   useEffect(() => {
     const modalElement = modalRef.current
     if (!modalElement) return
 
-    // 포커스 가능한 요소들
     const focusableElements = modalElement.querySelectorAll<HTMLElement>(
       'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
     )
@@ -37,21 +34,17 @@ export function Modal({ title, onClose, children }: ModalProps) {
     const firstElement = focusableElements[0]
     const lastElement = focusableElements[focusableElements.length - 1]
 
-    // 모달 열릴 때 첫 번째 요소에 포커스
     firstElement?.focus()
 
-    // Tab 키로 포커스 이동 시 모달 내부에 갇히도록
     const handleTab = (e: KeyboardEvent) => {
       if (e.key !== 'Tab') return
 
       if (e.shiftKey) {
-        // Shift + Tab: 역방향
         if (document.activeElement === firstElement) {
           e.preventDefault()
           lastElement?.focus()
         }
       } else {
-        // Tab: 정방향
         if (document.activeElement === lastElement) {
           e.preventDefault()
           firstElement?.focus()
@@ -63,7 +56,6 @@ export function Modal({ title, onClose, children }: ModalProps) {
     return () => modalElement.removeEventListener('keydown', handleTab)
   }, [])
 
-  // 배경(overlay) 클릭으로 모달 닫기
   const handleOverlayClick = (e: React.MouseEvent) => {
     if (e.target === overlayRef.current) {
       onClose()
