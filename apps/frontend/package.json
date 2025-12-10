@@ -11,6 +11,7 @@
     "test:run": "vitest run",
     "format": "prettier --write ."
   },
+  "license": "MIT",
   "dependencies": {
     "@tanstack/react-query": "^5.90.12",
     "ky": "^1.14.1",

@@ -4,6 +4,7 @@
     "frontend",
     "backend"
   ],
+  "license": "MIT",
   "scripts": {
     "start-server": "yarn workspace backend start",
     "start-client": "yarn workspace frontend dev"
