@@ -1,3 +1,5 @@
 export { default as CustomerSearch } from './CustomerSearch'
 export { default as CustomerList } from './CustomerList'
+export { default as CustomerListContent } from './CustomerListContent'
 export { default as CustomerDetail } from './CustomerDetail'
+export { default as CustomerDetailContent } from './CustomerDetailContent'
