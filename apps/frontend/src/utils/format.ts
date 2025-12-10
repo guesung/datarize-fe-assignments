@@ -11,7 +11,8 @@ export function formatPriceRange(range: string): string {
   // 9~10만원 (마지막 구간)
   if (max === 100000) return '9~10만원'
   // 그 외 구간 (예: 2~3만원, 3~4만원, ...)
-  return `${min / 10000}~${max / 10000}만원`
+  // API 응답이 20001, 30001 등 1원 단위 차이가 있어 반올림 처리
+  return `${Math.round(min / 10000)}~${Math.round(max / 10000)}만원`
 }
 
 /**

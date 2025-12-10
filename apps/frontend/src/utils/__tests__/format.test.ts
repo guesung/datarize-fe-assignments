@@ -7,11 +7,11 @@ describe('formatPriceRange', () => {
   })
 
   it('20001 - 30000 범위를 "2~3만원"으로 변환', () => {
-    expect(formatPriceRange('20001 - 30000')).toBe('2.0001~3만원')
+    expect(formatPriceRange('20001 - 30000')).toBe('2~3만원')
   })
 
   it('30001 - 40000 범위를 "3~4만원"으로 변환', () => {
-    expect(formatPriceRange('30001 - 40000')).toBe('3.0001~4만원')
+    expect(formatPriceRange('30001 - 40000')).toBe('3~4만원')
   })
 
   it('90001 - 100000 범위를 "9~10만원"으로 변환', () => {
@@ -19,8 +19,8 @@ describe('formatPriceRange', () => {
   })
 
   it('중간 가격대를 올바르게 변환', () => {
-    expect(formatPriceRange('50001 - 60000')).toBe('5.0001~6만원')
-    expect(formatPriceRange('70001 - 80000')).toBe('7.0001~8만원')
+    expect(formatPriceRange('50001 - 60000')).toBe('5~6만원')
+    expect(formatPriceRange('70001 - 80000')).toBe('7~8만원')
   })
 })
 
