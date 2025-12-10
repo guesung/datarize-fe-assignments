@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { CloseIcon } from '@/components/icons'
+import { useEscapeKey, useFocusTrap } from '@/hooks'
 
 interface ModalProps {
   title: string
@@ -12,49 +13,8 @@ export default function Modal({ title, onClose, children }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null)
   const overlayRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onClose()
-      }
-    }
-
-    document.addEventListener('keydown', handleEscape)
-    return () => document.removeEventListener('keydown', handleEscape)
-  }, [onClose])
-
-  useEffect(() => {
-    const modalElement = modalRef.current
-    if (!modalElement) return
-
-    const focusableElements = modalElement.querySelectorAll<HTMLElement>(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-    )
-
-    const firstElement = focusableElements[0]
-    const lastElement = focusableElements[focusableElements.length - 1]
-
-    firstElement?.focus()
-
-    const handleTab = (e: KeyboardEvent) => {
-      if (e.key !== 'Tab') return
-
-      if (e.shiftKey) {
-        if (document.activeElement === firstElement) {
-          e.preventDefault()
-          lastElement?.focus()
-        }
-      } else {
-        if (document.activeElement === lastElement) {
-          e.preventDefault()
-          firstElement?.focus()
-        }
-      }
-    }
-
-    modalElement.addEventListener('keydown', handleTab)
-    return () => modalElement.removeEventListener('keydown', handleTab)
-  }, [])
+  useEscapeKey(onClose)
+  useFocusTrap(modalRef)
 
   const handleOverlayClick = (e: React.MouseEvent) => {
     if (e.target === overlayRef.current) {
