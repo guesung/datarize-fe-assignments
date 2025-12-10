@@ -4,14 +4,14 @@
  * @returns 포맷팅된 레이블 (예: "~2만원")
  */
 export function formatPriceRange(range: string): string {
-  const [min, max] = range.split(' - ').map(Number);
+  const [min, max] = range.split(' - ').map(Number)
 
   // 2만원 이하
-  if (min === 0) return '~2만원';
+  if (min === 0) return '~2만원'
   // 9~10만원 (마지막 구간)
-  if (max === 100000) return '9~10만원';
+  if (max === 100000) return '9~10만원'
   // 그 외 구간 (예: 2~3만원, 3~4만원, ...)
-  return `${min / 10000}~${max / 10000}만원`;
+  return `${min / 10000}~${max / 10000}만원`
 }
 
 /**
@@ -20,7 +20,7 @@ export function formatPriceRange(range: string): string {
  * @returns 포맷팅된 금액 문자열 (예: "₩10,000")
  */
 export function formatCurrency(amount: number): string {
-  return new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(amount);
+  return new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(amount)
 }
 
 /**
@@ -29,5 +29,5 @@ export function formatCurrency(amount: number): string {
  * @returns 포맷팅된 날짜 (예: "2024. 7. 1.")
  */
 export function formatDate(dateString: string): string {
-  return new Date(dateString).toLocaleDateString('ko-KR');
+  return new Date(dateString).toLocaleDateString('ko-KR')
 }

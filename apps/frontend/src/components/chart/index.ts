@@ -1,1 +1,1 @@
-export { PurchaseFrequencyChart } from './PurchaseFrequencyChart';
+export { PurchaseFrequencyChart } from './PurchaseFrequencyChart'

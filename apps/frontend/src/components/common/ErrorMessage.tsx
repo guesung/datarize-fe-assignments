@@ -1,6 +1,6 @@
 interface ErrorMessageProps {
-  message: string;
-  onRetry?: () => void;
+  message: string
+  onRetry?: () => void
 }
 
 export function ErrorMessage({ message, onRetry }: ErrorMessageProps) {
@@ -16,5 +16,5 @@ export function ErrorMessage({ message, onRetry }: ErrorMessageProps) {
         </button>
       )}
     </div>
-  );
+  )
 }

@@ -1,16 +1,11 @@
 interface DateRangePickerProps {
-  fromDate: string;
-  toDate: string;
-  onFromDateChange: (date: string) => void;
-  onToDateChange: (date: string) => void;
+  fromDate: string
+  toDate: string
+  onFromDateChange: (date: string) => void
+  onToDateChange: (date: string) => void
 }
 
-export function DateRangePicker({
-  fromDate,
-  toDate,
-  onFromDateChange,
-  onToDateChange,
-}: DateRangePickerProps) {
+export function DateRangePicker({ fromDate, toDate, onFromDateChange, onToDateChange }: DateRangePickerProps) {
   return (
     <div className="flex gap-4 items-center">
       <div className="flex items-center gap-2">
@@ -38,5 +33,5 @@ export function DateRangePicker({
         />
       </div>
     </div>
-  );
+  )
 }

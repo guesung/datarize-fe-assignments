@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { usePurchaseFrequency } from '../../hooks';
-import { Loading, ErrorMessage, DateRangePicker } from '../common';
-import { formatPriceRange } from '../../utils';
+import { useState } from 'react'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
+import { usePurchaseFrequency } from '../../hooks'
+import { Loading, ErrorMessage, DateRangePicker } from '../common'
+import { formatPriceRange } from '../../utils'
 
 /**
  * 가격대별 구매 빈도 차트 컴포넌트
@@ -11,16 +11,16 @@ import { formatPriceRange } from '../../utils';
  */
 export function PurchaseFrequencyChart() {
   // 기본값: 7월 한 달 (2024-07-01 ~ 2024-07-31)
-  const [fromDate, setFromDate] = useState('2024-07-01');
-  const [toDate, setToDate] = useState('2024-07-31');
+  const [fromDate, setFromDate] = useState('2024-07-01')
+  const [toDate, setToDate] = useState('2024-07-31')
 
-  const { data, isLoading, isError, error, refetch } = usePurchaseFrequency(fromDate, toDate);
+  const { data, isLoading, isError, error, refetch } = usePurchaseFrequency(fromDate, toDate)
 
   // API 응답 데이터에 표시용 레이블 추가
   const chartData = data?.map((item) => ({
     ...item,
     label: formatPriceRange(item.range),
-  }));
+  }))
 
   return (
     <div className="bg-white p-6 rounded-lg shadow">
@@ -53,13 +53,7 @@ export function PurchaseFrequencyChart() {
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis
-                dataKey="label"
-                angle={-45}
-                textAnchor="end"
-                interval={0}
-                fontSize={12}
-              />
+              <XAxis dataKey="label" angle={-45} textAnchor="end" interval={0} fontSize={12} />
               <YAxis />
               <Tooltip
                 formatter={(value: number) => [`${value}건`, '구매 횟수']}
@@ -71,5 +65,5 @@ export function PurchaseFrequencyChart() {
         </div>
       )}
     </div>
-  );
+  )
 }
