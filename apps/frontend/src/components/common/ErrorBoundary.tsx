@@ -10,11 +10,6 @@ interface ErrorBoundaryState {
   error: Error | null
 }
 
-/**
- * 에러 바운더리 컴포넌트
- * - 하위 컴포넌트에서 발생한 에러를 catch하여 폴백 UI 표시
- * - 에러 복구를 위한 재시도 버튼 제공
- */
 export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props)
@@ -31,12 +26,10 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 
   render() {
     if (this.state.hasError) {
-      // 커스텀 폴백이 있으면 사용
       if (this.props.fallback) {
         return this.props.fallback
       }
 
-      // 기본 에러 UI
       return (
         <div className="flex flex-col items-center justify-center p-8 bg-red-50 rounded-lg">
           <div className="text-red-600 text-lg font-medium mb-2">오류가 발생했습니다</div>

@@ -17,14 +17,12 @@ function App() {
 
       <main className="max-w-7xl mx-auto py-6 px-4">
         <div className="grid gap-6">
-          {/* 가격대별 구매 빈도 차트 */}
           <ErrorBoundary>
             <Suspense fallback={<Loading />}>
               <PurchaseFrequencyChart />
             </Suspense>
           </ErrorBoundary>
 
-          {/* 고객 목록 */}
           <ErrorBoundary>
             <Suspense fallback={<Loading />}>
               <CustomerList onCustomerSelect={setSelectedCustomer} />
@@ -33,7 +31,6 @@ function App() {
         </div>
       </main>
 
-      {/* 고객 상세 모달 */}
       {selectedCustomer && (
         <ErrorBoundary>
           <Suspense fallback={<Loading />}>
