@@ -1,7 +1,10 @@
-import { useState } from 'react'
+import { useState, lazy, Suspense } from 'react'
 import type { Customer } from '@/types'
 import { PurchaseFrequencyChart } from './purchase'
-import { CustomerDetail, CustomerList } from './customer'
+import { CustomerList } from './customer'
+import { Loading } from '@/components'
+
+const CustomerDetail = lazy(() => import('./customer/CustomerDetail'))
 
 export default function Dashboard() {
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null)
@@ -21,7 +24,11 @@ export default function Dashboard() {
         </div>
       </main>
 
-      {selectedCustomer && <CustomerDetail customer={selectedCustomer} onClose={() => setSelectedCustomer(null)} />}
+      {selectedCustomer && (
+        <Suspense fallback={<Loading />}>
+          <CustomerDetail customer={selectedCustomer} onClose={() => setSelectedCustomer(null)} />
+        </Suspense>
+      )}
     </div>
   )
 }
