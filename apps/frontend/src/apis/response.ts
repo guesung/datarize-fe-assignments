@@ -1,5 +1,5 @@
 import { Customer, CustomerPurchase, PurchaseFrequency } from '@/types'
 
 export type PurchaseFrequencyResponse = PurchaseFrequency[]
-export type CustomerResponse = Customer[]
-export type CustomerPurchaseResponse = CustomerPurchase[]
+export type CustomersResponse = Customer[]
+export type CustomersPurchaseResponse = CustomerPurchase[]

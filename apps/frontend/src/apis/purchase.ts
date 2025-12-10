@@ -1,10 +1,10 @@
 import { api } from './api'
 import { PurchaseFrequencyResponse } from './response'
 
-export async function fetchPurchaseFrequency(from?: string, to?: string): Promise<PurchaseFrequencyResponse> {
+export async function fetchPurchaseFrequency(from?: string, to?: string) {
   const searchParams = new URLSearchParams()
   if (from) searchParams.set('from', from)
   if (to) searchParams.set('to', to)
 
-  return api.get('purchase-frequency', { searchParams }).json()
+  return api.get<PurchaseFrequencyResponse>('purchase-frequency', { searchParams }).json()
 }

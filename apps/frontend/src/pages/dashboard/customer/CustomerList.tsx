@@ -1,9 +1,8 @@
-import { useState, useCallback } from 'react'
-import { useCustomers } from '@/hooks'
-import { Loading, ErrorMessage } from '@/components'
+import { Suspense, useState, useCallback } from 'react'
+import { ErrorBoundary, Loading } from '@/components'
 import CustomerSearch from './CustomerSearch'
+import CustomerListContent from './CustomerListContent'
 import type { Customer } from '@/types'
-import { formatCurrency, getErrorMessage } from '@/utils'
 
 interface CustomerListProps {
   onCustomerSelect: (customer: Customer) => void
@@ -21,11 +20,6 @@ const SORT_LABELS: Record<SortOption, string> = {
 export default function CustomerList({ onCustomerSelect }: CustomerListProps) {
   const [sortBy, setSortBy] = useState<SortOption>('id')
   const [searchName, setSearchName] = useState('')
-
-  const { data, isLoading, isError, error, refetch } = useCustomers(
-    sortBy === 'id' ? undefined : sortBy,
-    searchName || undefined,
-  )
 
   const handleSearch = useCallback((name: string) => {
     setSearchName(name)
@@ -52,48 +46,11 @@ export default function CustomerList({ onCustomerSelect }: CustomerListProps) {
         ))}
       </div>
 
-      {isLoading && <Loading />}
-
-      {isError && (
-        <ErrorMessage message={getErrorMessage(error, '고객 목록을 불러오는데 실패했습니다.')} onRetry={refetch} />
-      )}
-
-      {data && data.length > 0 && (
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">이름</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  총 구매 횟수
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  총 구매 금액
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {data.map((customer) => (
-                <tr
-                  key={customer.id}
-                  onClick={() => onCustomerSelect(customer)}
-                  className="hover:bg-gray-100 cursor-pointer transition-colors"
-                >
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{customer.id}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{customer.name}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{customer.count}회</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {formatCurrency(customer.totalAmount)}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-
-      {data && data.length === 0 && <p className="text-center text-gray-500 py-8">검색 결과가 없습니다.</p>}
+      <ErrorBoundary>
+        <Suspense fallback={<Loading />}>
+          <CustomerListContent sortBy={sortBy} searchName={searchName} onCustomerSelect={onCustomerSelect} />
+        </Suspense>
+      </ErrorBoundary>
     </div>
   )
 }
