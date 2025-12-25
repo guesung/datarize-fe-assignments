@@ -1,6 +1,6 @@
 import { useState, lazy, Suspense } from 'react'
 import type { Customer } from '@/types'
-import { Loading } from '@/components'
+import { ErrorBoundary, Loading } from '@/components'
 import { PurchaseFrequencyChart, CustomerList } from './components'
 
 const CustomerDetail = lazy(() => import('./components').then((module) => ({ default: module.CustomerDetail })))
@@ -24,9 +24,11 @@ export default function Dashboard() {
       </main>
 
       {selectedCustomer && (
-        <Suspense fallback={<Loading />}>
-          <CustomerDetail customer={selectedCustomer} onClose={() => setSelectedCustomer(null)} />
-        </Suspense>
+        <ErrorBoundary>
+          <Suspense fallback={<Loading />}>
+            <CustomerDetail customer={selectedCustomer} onClose={() => setSelectedCustomer(null)} />
+          </Suspense>
+        </ErrorBoundary>
       )}
     </div>
   )
