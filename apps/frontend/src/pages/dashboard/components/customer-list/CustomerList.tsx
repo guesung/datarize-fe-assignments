@@ -1,6 +1,6 @@
 import { ErrorBoundary, Loading } from '@/components'
 import type { Customer } from '@/types'
-import { Suspense, useCallback, useState } from 'react'
+import { Suspense, useCallback, useState, useTransition } from 'react'
 import CustomerListContent from './CustomerListContent'
 import CustomerSearch from './CustomerSearch'
 
@@ -20,6 +20,13 @@ const SORT_LABELS: Record<SortOption, string> = {
 export default function CustomerList({ onCustomerSelect }: CustomerListProps) {
   const [sortBy, setSortBy] = useState<SortOption>('id')
   const [searchName, setSearchName] = useState('')
+  const [, startTransition] = useTransition()
+
+  const handleSortChange = (option: SortOption) => {
+    startTransition(() => {
+      setSortBy(option)
+    })
+  }
 
   const handleSearch = useCallback((name: string) => {
     setSearchName(name)
@@ -36,7 +43,7 @@ export default function CustomerList({ onCustomerSelect }: CustomerListProps) {
         {SORT_OPTIONS.map((option) => (
           <button
             key={option}
-            onClick={() => setSortBy(option)}
+            onClick={() => handleSortChange(option)}
             className={`px-3 py-1 text-sm rounded ${
               sortBy === option ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
             }`}
